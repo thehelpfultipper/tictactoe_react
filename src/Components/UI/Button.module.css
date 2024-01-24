@@ -1,0 +1,24 @@
+.Btn {
+    border: 1px solid var(--faded-body-purple);
+    font-size: 2.5rem;
+    padding: 1.2rem 3rem;
+    letter-spacing: .05rem;
+    color: #fff;
+    text-transform: uppercase;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background .5s ease-in-out;
+}
+
+.Btn:hover {
+    cursor: pointer;
+    background: var(--lightblue-tint);
+}
+
+.Btn-active {
+    background: var(--active-blue);
+}
+
+.Btn-regular {
+    background: var(--txtbx-purple);
+}
