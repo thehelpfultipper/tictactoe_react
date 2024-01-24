@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Start from './Components/Layout/Start';
+
+import s from './App.module.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={s.App}>
+      <Start />
+      <footer className={s["App-footer"]}>
+        <div className={s["foot-1"]}>
+          With 🤍 from <a
+            className={s["App-link"]}
+            href="https://thehelpfultipper.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >The Helpful Tipper</a>
+        </div>
+        <div className={s["foot-2"]}>
+          ©{new Date().getFullYear()}, The Helpful Tipper. All Rights Reserved.
+        </div>
+      </footer>
     </div>
   );
 }
