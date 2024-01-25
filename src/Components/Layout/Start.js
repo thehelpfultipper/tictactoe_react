@@ -8,17 +8,17 @@ export default function Start() {
     return (
         <header className={s["Start-header"]}>
             <div className={s["logo-wrapper"]}>
-            <img src={logo} className={s["Start-logo"]} alt="logo" />
+                <img src={logo} className={s["Start-logo"]} alt="logo" />
             </div>
-            <h1>
-            <span className={s["h1-reduced"]}>PinkPanda</span>
-            Tic•Tac•Toe
+            <h1 className={s["Start-h1"]}>
+                <span className={s["h1-reduced"]}>PinkPanda</span>
+                Tic•Tac•Toe
             </h1>
-            <Button   
-            role="button"
-            active
+            <Button
+                role="button"
+                active
             >
-            Start
+                Start
             </Button>
         </header>
     )

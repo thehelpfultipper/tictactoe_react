@@ -1,26 +1,29 @@
-
 .logo-wrapper {
-    background-image: radial-gradient(#fff, var(--pink-tint), var(--blue-tint));
-    height: 20vmin;
-    border-radius: 50%;
-  }
-  
-  .Start-logo {
-    height: 100%;
-    pointer-events: none;
-    border-radius: inherit;
-  }
-  
-  .h1-reduced {
-    display: block;
-    font-size: 1.9rem;
-    margin-bottom: 5px;
-  }
-  
-  .Start-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(15px + 2vmin);
-  }
+  background-image: radial-gradient(#fff, var(--pink-tint), var(--blue-tint));
+  height: 20vmin;
+  border-radius: 50%;
+}
+
+.Start-h1 {
+  margin-bottom: 100px;
+}
+
+.Start-logo {
+  height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.h1-reduced {
+  display: block;
+  font-size: 1.9rem;
+  margin-bottom: 5px;
+}
+
+.Start-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(15px + 2vmin);
+}
