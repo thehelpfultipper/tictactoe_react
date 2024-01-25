@@ -8,18 +8,3 @@
   justify-content: space-around;
   color: white;
 }
-
-.App-link {
-  color: var(--lightblue-tint);
-}
-
-.App-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.foot-1 {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-}

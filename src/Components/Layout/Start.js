@@ -18,7 +18,7 @@ export default function Start() {
                 role="button"
                 active
             >
-                Start
+                Play
             </Button>
         </header>
     )
