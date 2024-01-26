@@ -4,7 +4,9 @@ import Button from "../UI/Button";
 
 import s from './Start.module.css';
 
-export default function Start() {
+export default function Start({onGameOn}) {
+    const playBtnHandler = () => onGameOn(true);
+    
     return (
         <header className={s["Start-header"]}>
             <div className={s["logo-wrapper"]}>
@@ -16,6 +18,7 @@ export default function Start() {
             </h1>
             <Button
                 role="button"
+                onClick={playBtnHandler}
                 active
             >
                 Play
