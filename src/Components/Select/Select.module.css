@@ -1,0 +1,21 @@
+.Select-selection {
+  text-align: left;
+}
+
+.Select-btn {
+  text-align: right;
+  margin-top: 50px;
+}
+
+.btn-sm {
+  transform: scale(0.8);
+}
+
+.player {
+  font-weight: 600;
+  display: inline-block;
+  background: var(--main-purple);
+  color: #fff;
+  padding: 2px 15px;
+  font-size: 2.5rem;
+}

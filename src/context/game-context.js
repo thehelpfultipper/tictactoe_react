@@ -3,8 +3,12 @@ import { createContext } from "react";
 const GameContext = createContext({
     isGameOn: false,
     setIsGameOn: () => { },
-    player: [],
-    setPlayer: () => { }
+    players: {},
+    setPlayers: () => { },
+    showBoard: false,
+    setShowBoard: () => { },
+    startGame: false,
+    setStartGame: () => { }
 });
 
 export default GameContext;
