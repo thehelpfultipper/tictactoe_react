@@ -39,8 +39,9 @@ export default function Select() {
     let [playerName, setPlayerName] = useState('');
     let [isExit, setIsExit] = useState(false);
     let [isBack, setIsBack] = useState(false);
+    let [currentDisplay, setCurrentDisplay] = useState('next');
 
-    let { showBoard, players, setShowBoard, setPlayers, setIsGameOn } = useContext(GameContext);
+    let { showBoard, setShowBoard, setPlayers, setIsGameOn } = useContext(GameContext);
 
     const playerSelectHandler = (xory) => setPlayer(xory);
 
@@ -57,6 +58,7 @@ export default function Select() {
         }
 
         setIsBack(false);
+        setCurrentDisplay('done');
     }
 
     const doneBtnHandler = () => {
@@ -85,6 +87,15 @@ export default function Select() {
         }
 
         setIsBack(false);
+        setCurrentDisplay('end');
+    }
+
+    const backBtnHandler = () => {
+        if(currentDisplay==='end') {
+            setCurrentDisplay('done');
+        } else if (currentDisplay==='done') {
+            setCurrentDisplay('next');
+        }
     }
 
     const defaultSelection = (<div className={s["Select-selection"]}>
@@ -118,13 +129,15 @@ export default function Select() {
     useEffect(() => {
         // Reset action
         if (isBack) {
-            if (showBoard) {
+            if (currentDisplay==='done') {
                 setShowBoard(false);
                 setPlayers({});
-            } else {
+            } else if (currentDisplay==='next') {
+                setIsPlayerSelected(false);
                 setPlayer('');
             }
         }
+
 
         if (isExit) {
             setIsGameOn(false);
@@ -133,7 +146,7 @@ export default function Select() {
             setIsBack(false);
             setShowBoard(false);
         }
-    }, [isBack, isExit]);
+    }, [isBack, isExit, currentDisplay]);
 
     return (
         <Card>
@@ -142,6 +155,7 @@ export default function Select() {
                 player={isPlayerSelected}
                 onExit={setIsExit}
                 onBack={setIsBack}
+                onBackAction={backBtnHandler}
             />
             {isPlayerSelected ?
                 (showBoard
