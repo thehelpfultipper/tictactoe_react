@@ -11,7 +11,7 @@ export default function EndSelection({back}) {
 
     return (
         <div className={s["EndSelection-wrapper"]}>
-            <p>
+            <p className={s["player-name"]}>
                 <strong>{players.human.name}</strong> vs <strong>{players.computer.name}</strong>
             </p>
             <Button active role='button' onClick={() => setStartGame(true)}>Game On</Button>
