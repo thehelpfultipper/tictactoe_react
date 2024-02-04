@@ -41,7 +41,7 @@ export default function Select() {
     let [isBack, setIsBack] = useState(false);
     let [currentDisplay, setCurrentDisplay] = useState('next');
 
-    let { showBoard, setShowBoard, setPlayers, setIsGameOn } = useContext(GameContext);
+    let { showBoard, startGame, setShowBoard, setPlayers, setIsGameOn } = useContext(GameContext);
 
     const playerSelectHandler = (xory) => setPlayer(xory);
 
@@ -76,8 +76,8 @@ export default function Select() {
             const player2 = generateRandomPlayer(player);
 
             const gamePlayers = {
-                human: player1,
-                computer: player2
+                human: {...player1, score: 0},
+                computer: {...player2, score: 0}
             }
 
             console.log(gamePlayers)
@@ -151,7 +151,7 @@ export default function Select() {
     return (
         <Card>
             <Nav
-                isSelect
+                isSelect={startGame===false}
                 player={isPlayerSelected}
                 onExit={setIsExit}
                 onBack={setIsBack}
@@ -159,7 +159,7 @@ export default function Select() {
             />
             {isPlayerSelected ?
                 (showBoard
-                    ? <EndSelection back={isBack} />
+                    ? <EndSelection />
                     : nameSelection
                 ) : defaultSelection}
         </Card>

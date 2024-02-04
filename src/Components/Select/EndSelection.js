@@ -6,7 +6,7 @@ import s from './EndSelection.module.css';
 import GameContext from '../../context/game-context';
 import Button from '../UI/Button';
 
-export default function EndSelection({back}) {
+export default function EndSelection() {
     const { players, setStartGame } = useContext(GameContext);
 
     return (

@@ -5,7 +5,8 @@ const defaultGameState = {
     isGameOn: false,
     players: {},
     showBoard: false,
-    startGame: false
+    startGame: false,
+    resetBoard: false
 }
 
 const gameReducer = (state, action) => {
@@ -38,6 +39,13 @@ const gameReducer = (state, action) => {
         }
     }
 
+    if(type==='SET_RESETBOARD') {
+        return {
+            ...state,
+            resetBoard: val
+        }
+    }
+
     return defaultGameState;
 }
 
@@ -52,6 +60,8 @@ export default function GameProvider({ children }) {
 
     const startGameHandler = (bool) => dispatchGameAction({ type: 'SET_STARTGAME', val: bool });
 
+    const resetBoardHandler = (bool) => dispatchGameAction({ type: 'SET_RESETBOARD', val: bool });
+
     let gameContext = {
         isGameOn: gameState.isGameOn,
         setIsGameOn: gameOnHandler,
@@ -60,7 +70,9 @@ export default function GameProvider({ children }) {
         players: gameState.players,
         setPlayers: playersHandler,
         startGame: gameState.startGame,
-        setStartGame: startGameHandler
+        setStartGame: startGameHandler,
+        resetBoard: gameState.resetBoard,
+        setResetBoard: resetBoardHandler
     }
 
     return (

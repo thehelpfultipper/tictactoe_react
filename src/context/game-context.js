@@ -8,7 +8,9 @@ const GameContext = createContext({
     showBoard: false,
     setShowBoard: () => { },
     startGame: false,
-    setStartGame: () => { }
+    setStartGame: () => { },
+    resetBoard: false,
+    setResetBoard: () => { }
 });
 
 export default GameContext;

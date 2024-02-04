@@ -1,8 +1,10 @@
 .Nav-wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
+/* Select nav styles */
 .nav-icon {
     width: 40px;
     cursor: pointer;
@@ -26,4 +28,27 @@
 
 .flx-end {
     justify-content: flex-end!important;
+}
+
+/* Game screen nav styles */
+.nav-btn {
+    background: var(--faded-body-purple);
+    font-size: 1.5rem;
+    padding: 0.8rem 2rem;
+}
+
+.reset-btn:hover {
+    background-color: var(--pink-tint);
+    color: #333;
+}
+
+.end-btn:hover {
+    background-color: var(--orange-tint);
+}
+
+@media (max-width:650px) {
+    .nav-btn {
+        padding: 0.4rem 1rem;
+        font-size: 1.2rem;
+    }
 }

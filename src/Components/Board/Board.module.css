@@ -1,0 +1,83 @@
+/* Gameboard styles */
+.board-wrapper {
+  background: transparent;
+  /* padding-top: 1.5em; */
+  padding-bottom: 1.5em;
+  border: 1px solid var(--faded-body-purple);
+  box-shadow: 0 0 20px var(--main-purple);
+  color: #fff;
+  position: relative;
+  display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  grid-template-rows: repeat(3, 150px);
+  grid-gap: 5px;
+  justify-content: center;
+}
+
+.cell {
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--faded-body-purple);
+  transition: all 0.3s ease-in-out;
+}
+
+.cell:hover{
+  border-color: var(--pink-tint);
+}
+
+.cell.active {
+  background-color: var(--txtbx-purple);
+}
+
+/* @media (max-width: 768px) {
+  .board-wrapper {
+    max-width: 650px;
+  }
+} */
+
+@media (max-width: 650px) {
+  .board {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+  }
+}
+
+/* Player styles */
+/* .players {
+  margin-bottom: 1em;
+} */
+
+.players-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+}
+
+.players-list li {
+  padding: 0.8rem 1.5rem;
+}
+
+.players-list li.active {
+  border: 1px solid var(--pink-tint);
+  background: var(--main-purple);
+}
+
+.players-list span {
+  font-weight: 600;
+}
+
+/* Status styles */
+.status {
+  font-size: 1.5rem;
+}
