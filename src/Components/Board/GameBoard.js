@@ -12,12 +12,53 @@ export default function GameBoard() {
     let [board, setBoard] = useState(Array(9).fill(''));
     let [isHuman, setIsHuman] = useState(false);
     let [currentPlayer, setCurrentPlayer] = useState(null);
-    const [winner, setWinner] = useState(null);
+    let [winner, setWinner] = useState(null);
 
-    const {players, resetBoard, setResetBoard} = useContext(GameContext);
+    const {players, setPlayers, resetBoard, setResetBoard} = useContext(GameContext);
     const {human, computer} = players;
 
-    const checkWinner = () => false;
+    const checkWinner = (currentBoard) => {
+        const winningConditions = [
+          [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+          [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+          [0, 4, 8], [2, 4, 6] // Diagonals
+        ];
+      
+        for (let condition of winningConditions) {
+          const [a, b, c] = condition;
+
+          if (currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a] === currentBoard[c]) {
+            console.log('winning condition: ' + condition)
+
+            if (currentBoard[a] === human.symbol) {
+              setPlayers({
+                ...players,
+                human: {
+                    ...human, 
+                    score: human.score + 1
+                }
+              });
+            } else {
+                setPlayers({
+                  ...players,
+                  computer: {
+                      ...computer, 
+                      score: computer.score + 1
+                  }
+                });
+            }
+            return currentBoard[a];
+          }
+        }
+      
+        if (currentBoard.every(cell => cell)) {
+          setWinner('draw');
+          console.log('DRAW')
+          return 'draw';
+        }
+      
+        return null;
+      };
 
     const computerMove = (currentBoard) => {
         const emptyCells = currentBoard.reduce((acc, cell, index) => {
@@ -25,12 +66,13 @@ export default function GameBoard() {
           return acc;
         }, []);
     
-        let bestMove = false;
+        let bestMove;
         for (let i = 0; i < emptyCells.length; i++) {
           const testBoard = [...currentBoard];
           testBoard[emptyCells[i]] = computer.symbol;
           if (checkWinner(testBoard) === computer.symbol) {
             bestMove = emptyCells[i];
+            console.log('BEST MOVE')
             break;
           }
         }
@@ -41,6 +83,7 @@ export default function GameBoard() {
             testBoard[emptyCells[i]] = human.symbol;
             if (checkWinner(testBoard) === human.symbol) {
               bestMove = emptyCells[i];
+              console.log('BEST MOVE to BLOCK')
               break;
             }
           }
@@ -50,43 +93,68 @@ export default function GameBoard() {
           const centerIndex = 4;
           if (emptyCells.includes(centerIndex)) {
             bestMove = centerIndex;
+            console.log('BEST MOVE to CENTER')
           } else {
             const cornerIndices = [0, 2, 6, 8];
             const emptyCorners = emptyCells.filter(cell => cornerIndices.includes(cell));
             if (emptyCorners.length > 0) {
               const randomCornerIndex = Math.floor(Math.random() * emptyCorners.length);
               bestMove = emptyCorners[randomCornerIndex];
+              console.log('BEST MOVE at CORNER')
+
             } else {
               const randomIndex = Math.floor(Math.random() * emptyCells.length);
               bestMove = emptyCells[randomIndex];
+              console.log('BEST MOVE at RANDOM')
+
             }
           }
         }
     
         const newBoard = [...currentBoard];
         newBoard[bestMove] = computer.symbol;
-    
         setBoard(newBoard);
+
+        // Check if the move results in a win for the computer or a draw
+        const winner = checkWinner(newBoard);
+        if (winner === computer.symbol) {
+            setWinner(computer.symbol);
+            setPlayers({
+                ...players,
+                computer: {
+                    ...computer, 
+                    score: computer.score + 1
+                }
+              });
+              console.log('computerMove winner')
+        } else if (winner === 'draw') {
+            setWinner('draw');
+            console.log('computerMove draw')
+        }
+
+        // setIsHuman(true);
+    
         // checkWinner(newBoard);
-        setIsHuman(true);
+        // setIsHuman(true);
         setCurrentPlayer(human.symbol);
       };
 
     const cellClickHandler = (index) => {
         // Check if cell is played or there's winner
-        if (board[index] || winner || !isHuman) return;
+        if (board[index] || !isHuman) return;
 
         console.log('CELL CLICKED: ', index);
-        console.log(human.symbol)
         // Copy of new board to update existing
         const newBoard = [...board];
         newBoard[index] = human.symbol;
         setBoard(newBoard);
 
-        // checkWinner(newBoard);
         setCurrentPlayer(computer.symbol);
+        console.log('running checkWinner after player click:')
+        checkWinner(newBoard);
 
         if (!winner) {
+            console.log('no winner after click, play computer')
             setTimeout(() => {
                 computerMove([...newBoard]);
             }, 500);
@@ -109,18 +177,11 @@ export default function GameBoard() {
         }
     };
 
-
     const resetGame = () => {
-        // Reset player score
-        // let newGameScore = {
-        //     ...players,
-        //     human: { ...human, score: 0 },
-        //     computer: { ...computer, score: 0 }
-        // }
         setBoard(Array(9).fill(null));
-        // setWinner(null);
-        // setPlayers(newGameScore);
-        startingPlayer();
+        setWinner(null);
+        setIsHuman(false);
+        setCurrentPlayer(null);
     };
 
     useEffect(() => {
@@ -132,6 +193,8 @@ export default function GameBoard() {
         // console.log(resetBoard)
         resetBoard && resetGame();
         setResetBoard(false);
+        startingPlayer();
+
     }, [resetBoard]);
 
     return (
