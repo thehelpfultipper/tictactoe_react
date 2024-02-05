@@ -141,7 +141,7 @@ export default function GameBoard() {
 
     const cellClickHandler = (index) => {
         // Check if cell is played or there's winner
-        if (board[index] || !isHuman) return;
+        if (board[index] || winner || !isHuman) return;
 
         console.log('CELL CLICKED: ', index);
         // Copy of new board to update existing
@@ -182,6 +182,8 @@ export default function GameBoard() {
         setWinner(null);
         setIsHuman(false);
         setCurrentPlayer(null);
+        startingPlayer();
+
     };
 
     useEffect(() => {
@@ -190,10 +192,9 @@ export default function GameBoard() {
     }, []);
 
     useEffect(() => {
-        // console.log(resetBoard)
-        resetBoard && resetGame();
+        console.log(resetBoard)
+        resetGame();
         setResetBoard(false);
-        startingPlayer();
 
     }, [resetBoard]);
 
@@ -201,7 +202,7 @@ export default function GameBoard() {
         <Card className={s["board-wrapper"]}>
             <Players current={currentPlayer} />
             <BoardGrid board={board} onCellClick={cellClickHandler} />
-            <Status cPlayer={currentPlayer} />
+            <Status cPlayer={currentPlayer} winner={winner} />
         </Card>
     )
 }
