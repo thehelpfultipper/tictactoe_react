@@ -1,0 +1,24 @@
+.backdrop {
+    background: #000;
+    opacity: .9;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.overlay {
+    color: white;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-60%);
+    font-size: 1.2em;
+}
