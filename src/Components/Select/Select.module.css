@@ -2,6 +2,10 @@
   text-align: left;
 }
 
+.Select-instructions {
+  margin-top: 10px;
+}
+
 .Select-btn {
   text-align: right;
   margin-top: 40px;

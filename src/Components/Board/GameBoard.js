@@ -1,10 +1,12 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 
 import Card from '../UI/Card';
 import Players from './Players';
 import BoardGrid from './BoardGrid';
 import Status from './Status';
 import GameContext from '../../context/game-context';
+import Modal from '../UI/Modal';
+import Button from '../UI/Button';
 
 import s from './Board.module.css';
 
@@ -14,103 +16,103 @@ export default function GameBoard() {
     let [currentPlayer, setCurrentPlayer] = useState(null);
     let [winner, setWinner] = useState(null);
 
-    const {players, setPlayers, resetBoard, setResetBoard} = useContext(GameContext);
-    const {human, computer} = players;
+    const { players, setPlayers, resetBoard, setResetBoard } = useContext(GameContext);
+    const { human, computer } = players;
 
     const checkWinner = (currentBoard) => {
         const winningConditions = [
-          [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-          [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-          [0, 4, 8], [2, 4, 6] // Diagonals
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+            [0, 4, 8], [2, 4, 6] // Diagonals
         ];
-      
+
         for (let condition of winningConditions) {
-          const [a, b, c] = condition;
+            const [a, b, c] = condition;
 
-          if (currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a] === currentBoard[c]) {
-            console.log('winning condition: ' + condition)
+            if (currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a] === currentBoard[c]) {
+                console.log('winning condition: ' + condition)
 
-            if (currentBoard[a] === human.symbol) {
-              setPlayers({
-                ...players,
-                human: {
-                    ...human, 
-                    score: human.score + 1
+                if (currentBoard[a] === human.symbol) {
+                    setPlayers({
+                        ...players,
+                        human: {
+                            ...human,
+                            score: human.score + 1
+                        }
+                    });
+                } else {
+                    setPlayers({
+                        ...players,
+                        computer: {
+                            ...computer,
+                            score: computer.score + 1
+                        }
+                    });
                 }
-              });
-            } else {
-                setPlayers({
-                  ...players,
-                  computer: {
-                      ...computer, 
-                      score: computer.score + 1
-                  }
-                });
+                return currentBoard[a];
             }
-            return currentBoard[a];
-          }
         }
-      
+
         if (currentBoard.every(cell => cell)) {
-          setWinner('draw');
-          console.log('DRAW')
-          return 'draw';
+            setWinner('draw');
+            console.log('DRAW')
+            return 'draw';
         }
-      
+
         return null;
-      };
+    };
 
     const computerMove = (currentBoard) => {
         const emptyCells = currentBoard.reduce((acc, cell, index) => {
-          if (!cell) acc.push(index);
-          return acc;
+            if (!cell) acc.push(index);
+            return acc;
         }, []);
-    
+
         let bestMove;
         for (let i = 0; i < emptyCells.length; i++) {
-          const testBoard = [...currentBoard];
-          testBoard[emptyCells[i]] = computer.symbol;
-          if (checkWinner(testBoard) === computer.symbol) {
-            bestMove = emptyCells[i];
-            console.log('BEST MOVE')
-            break;
-          }
-        }
-    
-        if (!bestMove) {
-          for (let i = 0; i < emptyCells.length; i++) {
             const testBoard = [...currentBoard];
-            testBoard[emptyCells[i]] = human.symbol;
-            if (checkWinner(testBoard) === human.symbol) {
-              bestMove = emptyCells[i];
-              console.log('BEST MOVE to BLOCK')
-              break;
+            testBoard[emptyCells[i]] = computer.symbol;
+            if (checkWinner(testBoard) === computer.symbol) {
+                bestMove = emptyCells[i];
+                console.log('BEST MOVE')
+                break;
             }
-          }
         }
-    
+
         if (!bestMove) {
-          const centerIndex = 4;
-          if (emptyCells.includes(centerIndex)) {
-            bestMove = centerIndex;
-            console.log('BEST MOVE to CENTER')
-          } else {
-            const cornerIndices = [0, 2, 6, 8];
-            const emptyCorners = emptyCells.filter(cell => cornerIndices.includes(cell));
-            if (emptyCorners.length > 0) {
-              const randomCornerIndex = Math.floor(Math.random() * emptyCorners.length);
-              bestMove = emptyCorners[randomCornerIndex];
-              console.log('BEST MOVE at CORNER')
-
-            } else {
-              const randomIndex = Math.floor(Math.random() * emptyCells.length);
-              bestMove = emptyCells[randomIndex];
-              console.log('BEST MOVE at RANDOM')
-
+            for (let i = 0; i < emptyCells.length; i++) {
+                const testBoard = [...currentBoard];
+                testBoard[emptyCells[i]] = human.symbol;
+                if (checkWinner(testBoard) === human.symbol) {
+                    bestMove = emptyCells[i];
+                    console.log('BEST MOVE to BLOCK')
+                    break;
+                }
             }
-          }
         }
-    
+
+        if (!bestMove) {
+            const centerIndex = 4;
+            if (emptyCells.includes(centerIndex)) {
+                bestMove = centerIndex;
+                console.log('BEST MOVE to CENTER')
+            } else {
+                const cornerIndices = [0, 2, 6, 8];
+                const emptyCorners = emptyCells.filter(cell => cornerIndices.includes(cell));
+                if (emptyCorners.length > 0) {
+                    const randomCornerIndex = Math.floor(Math.random() * emptyCorners.length);
+                    bestMove = emptyCorners[randomCornerIndex];
+                    console.log('BEST MOVE at CORNER')
+
+                } else {
+                    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+                    bestMove = emptyCells[randomIndex];
+                    console.log('BEST MOVE at RANDOM')
+
+                }
+            }
+        }
+
         const newBoard = [...currentBoard];
         newBoard[bestMove] = computer.symbol;
         setBoard(newBoard);
@@ -122,22 +124,22 @@ export default function GameBoard() {
             setPlayers({
                 ...players,
                 computer: {
-                    ...computer, 
+                    ...computer,
                     score: computer.score + 1
                 }
-              });
-              console.log('computerMove winner')
+            });
+            console.log('computerMove winner')
         } else if (winner === 'draw') {
             setWinner('draw');
             console.log('computerMove draw')
         }
 
         // setIsHuman(true);
-    
+
         // checkWinner(newBoard);
         // setIsHuman(true);
         setCurrentPlayer(human.symbol);
-      };
+    };
 
     const cellClickHandler = (index) => {
         // Check if cell is played or there's winner
@@ -183,8 +185,13 @@ export default function GameBoard() {
         setIsHuman(false);
         setCurrentPlayer(null);
         startingPlayer();
-
     };
+
+    const resetGameBoard = useCallback(()=>{
+        console.log('Resetting board...');
+        setResetBoard(false);
+        resetGame();
+    }, []);
 
     useEffect(() => {
         // Select random player to start on mount
@@ -192,17 +199,46 @@ export default function GameBoard() {
     }, []);
 
     useEffect(() => {
-        console.log(resetBoard)
-        resetGame();
-        setResetBoard(false);
+        console.log('Running reset')
+        if(resetBoard) {
+            resetGameBoard();
+        } else {
+            return;
+        }
 
-    }, [resetBoard]);
+    }, [resetBoard, resetGameBoard]);
 
     return (
         <Card className={s["board-wrapper"]}>
             <Players current={currentPlayer} />
-            <BoardGrid board={board} onCellClick={cellClickHandler} />
+
+            {
+                winner && winner!==null &&
+                <Modal>
+                    <p className={s["modal-title"]}>Game Over</p>
+                    {
+                        winner !== 'draw' ?
+                            <p>
+                                {
+                                    winner === human.symbol ?
+                                        `👤 ${human.name}` :
+                                        `🤖 ${computer.name}`
+                                }
+                                {" "} won!
+                            </p> :
+                            <p>It's a draw ⚖️</p>
+                    }
+                    <Button
+                        active={false}
+                        cs={s["rematch-btn"]}
+                        onClick={()=>setResetBoard(true)}
+                    >Rematch</Button>
+                </Modal>
+            }
             <Status cPlayer={currentPlayer} winner={winner} />
+            <BoardGrid board={board} onCellClick={cellClickHandler} />
+
+
         </Card>
     )
 }

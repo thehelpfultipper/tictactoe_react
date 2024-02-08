@@ -61,11 +61,14 @@
   padding: 0;
   display: flex;
   justify-content: space-between;
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
+  font-size: 1rem;
 }
 
 .players-list li {
-  padding: 0.8rem 1.5rem;
+  /* padding: 0.8rem 1.5rem; */
+  padding: 0.4rem 1.2rem;
+    margin: auto 0;
 }
 
 .players-list li.active {
@@ -79,5 +82,13 @@
 
 /* Status styles */
 .status {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+}
+
+/* Modal-game over styles */
+.modal-title {
+  font-weight: 800;
+  font-size: 2em;
+  color: var(--pink-tint);
+  margin-bottom: 0;
 }

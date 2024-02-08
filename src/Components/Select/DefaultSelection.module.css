@@ -1,7 +1,10 @@
 .player {
-    margin: 20px;
+    /* margin: 20px; */
 }
 
 .selection {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: center;
 }
