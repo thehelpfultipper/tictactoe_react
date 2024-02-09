@@ -15,12 +15,12 @@ export default function Nav({ isSelect, player, ...props }) {
         props.onBackAction();
     }
 
-    const endGameHandler = () => {
-        setIsGameOn(false);
-        setPlayers({});
-        setShowBoard(false);
-        setStartGame(false);
-    }
+    // const endGameHandler = () => {
+    //     setIsGameOn(false);
+    //     setPlayers({});
+    //     setShowBoard(false);
+    //     setStartGame(false);
+    // }
 
     const cardNav = <div className={`${s["Nav-wrapper"]}${!player ? ` ${s["flx-end"]}` : ''}`}>
         {
@@ -51,7 +51,7 @@ export default function Nav({ isSelect, player, ...props }) {
             role='button'
             active={false}
             cs={`${s["end-btn"]} ${s["nav-btn"]}`}
-            onClick={endGameHandler}
+            onClick={()=>{props.onEndGame(true)}}
         >End</Button>
     </div>
 

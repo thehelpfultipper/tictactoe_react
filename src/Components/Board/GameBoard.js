@@ -7,16 +7,17 @@ import Status from './Status';
 import GameContext from '../../context/game-context';
 import Modal from '../UI/Modal';
 import Button from '../UI/Button';
+import ScoreBoard from './ScoreBoard';
 
 import s from './Board.module.css';
 
-export default function GameBoard() {
+export default function GameBoard(props) {
     let [board, setBoard] = useState(Array(9).fill(''));
     let [isHuman, setIsHuman] = useState(false);
     let [currentPlayer, setCurrentPlayer] = useState(null);
     let [winner, setWinner] = useState(null);
 
-    const { players, setPlayers, resetBoard, setResetBoard } = useContext(GameContext);
+    const { players, setPlayers, resetBoard, setResetBoard} = useContext(GameContext);
     const { human, computer } = players;
 
     const checkWinner = (currentBoard) => {
@@ -187,11 +188,32 @@ export default function GameBoard() {
         startingPlayer();
     };
 
-    const resetGameBoard = useCallback(()=>{
+    const resetGameBoard = useCallback(() => {
         console.log('Resetting board...');
         setResetBoard(false);
         resetGame();
     }, []);
+
+    const drawModal = winner !== 'draw' ?
+        <p>
+            {
+                winner === human.symbol ?
+                    `👤 ${human.name}` :
+                    `🤖 ${computer.name}`
+            }
+            {" "} won!
+        </p> :
+        <p>It's a draw ⚖️</p>;
+
+    const gameOverModal = <Modal>
+        <p className={s["modal-title"]}>Game Over</p>
+        {drawModal}
+        <Button
+            active={false}
+            cs={s["rematch-btn"]}
+            onClick={() => setResetBoard(true)}
+        >Rematch</Button>
+    </Modal>;
 
     useEffect(() => {
         // Select random player to start on mount
@@ -200,7 +222,7 @@ export default function GameBoard() {
 
     useEffect(() => {
         console.log('Running reset')
-        if(resetBoard) {
+        if (resetBoard) {
             resetGameBoard();
         } else {
             return;
@@ -211,34 +233,10 @@ export default function GameBoard() {
     return (
         <Card className={s["board-wrapper"]}>
             <Players current={currentPlayer} />
-
-            {
-                winner && winner!==null &&
-                <Modal>
-                    <p className={s["modal-title"]}>Game Over</p>
-                    {
-                        winner !== 'draw' ?
-                            <p>
-                                {
-                                    winner === human.symbol ?
-                                        `👤 ${human.name}` :
-                                        `🤖 ${computer.name}`
-                                }
-                                {" "} won!
-                            </p> :
-                            <p>It's a draw ⚖️</p>
-                    }
-                    <Button
-                        active={false}
-                        cs={s["rematch-btn"]}
-                        onClick={()=>setResetBoard(true)}
-                    >Rematch</Button>
-                </Modal>
-            }
+            {winner && winner !== null && gameOverModal}
+            {props.isEnd && <ScoreBoard onEnd={props.onEndGame} />}
             <Status cPlayer={currentPlayer} winner={winner} />
             <BoardGrid board={board} onCellClick={cellClickHandler} />
-
-
         </Card>
     )
 }
