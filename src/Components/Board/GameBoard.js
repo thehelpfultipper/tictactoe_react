@@ -17,7 +17,7 @@ export default function GameBoard(props) {
     let [currentPlayer, setCurrentPlayer] = useState(null);
     let [winner, setWinner] = useState(null);
 
-    const { players, setPlayers, resetBoard, setResetBoard} = useContext(GameContext);
+    const { players, setPlayers, resetBoard, setResetBoard } = useContext(GameContext);
     const { human, computer } = players;
 
     const checkWinner = (currentBoard) => {
@@ -33,23 +33,6 @@ export default function GameBoard(props) {
             if (currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a] === currentBoard[c]) {
                 console.log('winning condition: ' + condition)
 
-                if (currentBoard[a] === human.symbol) {
-                    setPlayers({
-                        ...players,
-                        human: {
-                            ...human,
-                            score: human.score + 1
-                        }
-                    });
-                } else {
-                    setPlayers({
-                        ...players,
-                        computer: {
-                            ...computer,
-                            score: computer.score + 1
-                        }
-                    });
-                }
                 return currentBoard[a];
             }
         }
@@ -129,9 +112,12 @@ export default function GameBoard(props) {
                     score: computer.score + 1
                 }
             });
+            props.rounds.setRounds(prev => prev + 1);
             console.log('computerMove winner')
         } else if (winner === 'draw') {
             setWinner('draw');
+            props.rounds.setRounds(prev => prev + 1)
+
             console.log('computerMove draw')
         }
 
@@ -154,9 +140,21 @@ export default function GameBoard(props) {
 
         setCurrentPlayer(computer.symbol);
         console.log('running checkWinner after player click:')
-        checkWinner(newBoard);
 
-        if (!winner) {
+        if (checkWinner(newBoard) === human.symbol) {
+            setWinner(human.symbol);
+            setPlayers({
+                ...players,
+                human: {
+                    ...human,
+                    score: human.score + 1
+                }
+            });
+            props.rounds.setRounds(prev => prev + 1)
+
+            console.log('human winner')
+        }
+        else {
             console.log('no winner after click, play computer')
             setTimeout(() => {
                 computerMove([...newBoard]);
@@ -232,9 +230,9 @@ export default function GameBoard(props) {
 
     return (
         <Card className={s["board-wrapper"]}>
+            {winner && winner !== null ? gameOverModal : null}
+            {props.isEnd ? <ScoreBoard rounds={props.rounds} onEnd={props.onEndGame} /> : null}
             <Players current={currentPlayer} />
-            {winner && winner !== null && gameOverModal}
-            {props.isEnd && <ScoreBoard onEnd={props.onEndGame} />}
             <Status cPlayer={currentPlayer} winner={winner} />
             <BoardGrid board={board} onCellClick={cellClickHandler} />
         </Card>

@@ -8,8 +8,8 @@
   color: #fff;
   position: relative;
   display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .board {
@@ -29,7 +29,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.cell:hover{
+.cell:hover {
   border-color: var(--pink-tint);
   background-color: var(--txtbx-purple);
 }
@@ -68,7 +68,7 @@
 .players-list li {
   /* padding: 0.8rem 1.5rem; */
   padding: 0.4rem 1.2rem;
-    margin: auto 0;
+  margin: auto 0;
 }
 
 .players-list li.active {
@@ -91,4 +91,48 @@
   font-size: 2em;
   color: var(--pink-tint);
   margin-bottom: 0;
+}
+
+/* Scoreboard styles */
+.score-board {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+  font-size: 1.2rem;
+  width: 60%;
+}
+
+.score-board ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.score-board ul li {
+  display: inline-block;
+  border-bottom: 1px solid var(--txtbx-purple);
+  padding-bottom: 0.2rem;
+}
+
+.score-board .stats::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: var(--txtbx-purple);
+  position: absolute;
+  bottom: -0.8em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.emp {
+  color: var(--orange-tint);
+  font-weight: 600;
+  font-size: 1.4rem;
 }

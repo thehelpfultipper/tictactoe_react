@@ -9,6 +9,7 @@ import s from './GameScreen.module.css';
 
 export default function GameScreen() {
     let [endGame, setEndGame] = useState(false);
+    let [rounds, setRounds] = useState(0);
 
     const {startGame} = useContext(GameContext);
 
@@ -23,7 +24,7 @@ export default function GameScreen() {
             <Card className={s["game-nav-wrapper"]}>
                 <Nav onEndGame={setEndGame} />
             </Card>
-            <GameBoard isEnd={endGame} onEndGame={setEndGame} />
+            <GameBoard isEnd={endGame} onEndGame={setEndGame} rounds={{rounds, setRounds}} />
         </div>
     )
 }
