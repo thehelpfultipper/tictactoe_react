@@ -42,7 +42,7 @@ export default function ScoreBoard(props) {
             </div>
             <Button
                 active={false}
-                // cs={s["rematch-btn"]}
+                cs={s["rematch-btn"]}
                 onClick={endGameHandler}
             >Start Over</Button>
         </Modal>

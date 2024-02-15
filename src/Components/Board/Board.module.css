@@ -34,8 +34,6 @@
   background-color: var(--txtbx-purple);
 }
 
-.cell.active {
-}
 
 /* @media (max-width: 768px) {
   .board-wrapper {
@@ -47,6 +45,17 @@
   .board {
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
+  }
+
+  .cell {
+    font-size: 3em;
+  }
+}
+
+@media (max-width: 345px) {
+  .board {
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
   }
 }
 
@@ -92,6 +101,14 @@
   color: var(--pink-tint);
   margin-bottom: 0;
 }
+
+@media (max-width: 375px) {
+  .rematch-btn {
+    padding: 1rem;
+    font-size: 2rem;
+  }
+}
+
 
 /* Scoreboard styles */
 .score-board {

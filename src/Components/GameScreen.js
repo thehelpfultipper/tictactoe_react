@@ -20,7 +20,7 @@ export default function GameScreen() {
     }, [startGame]);
 
     return (
-        <div ref={navWrapRef}>
+        <div ref={navWrapRef} className={s["gamescreen-wrapper"]}>
             <Card className={s["game-nav-wrapper"]}>
                 <Nav onEndGame={setEndGame} />
             </Card>

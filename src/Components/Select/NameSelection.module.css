@@ -8,9 +8,9 @@
 
 .input-wrapper {
     position: relative;
-    padding: 0 1.2rem;
-    margin-bottom: 5px;
-    width: 500px;
+    /* padding: 0 1.2rem;
+    margin-bottom: 5px; */
+    /* width: 500px; */
 }
 
 .input-wrapper::after {
@@ -19,6 +19,12 @@
     height: 1px;
     background: var(--orange-tint);
     position: absolute;
-    left: 1.2rem;
+    left: 0;
     bottom: -.5rem;
+}
+
+@media (max-width: 425px) {
+    .name-input {
+        font-size: 1.5rem;
+    }
 }

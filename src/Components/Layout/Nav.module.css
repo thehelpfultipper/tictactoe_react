@@ -6,7 +6,8 @@
 
 /* Select nav styles */
 .nav-icon {
-    width: 40px;
+    max-width: 40px;
+    width: 100%;
     cursor: pointer;
 }
 
@@ -49,9 +50,12 @@
     background-color: var(--orange-tint);
 }
 
-/* @media (max-width:650px) {
-    .nav-btn {
-        padding: 0.4rem 1rem;
-        font-size: 1.2rem;
+@media (max-width:425px) {
+    .nav-icon {
+        max-width: 35px;
     }
-} */
+
+    .back-txt {
+        font-size: 1.4rem;
+    }
+}

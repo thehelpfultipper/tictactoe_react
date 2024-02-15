@@ -6,7 +6,6 @@ import GameContext from "../context/game-context";
 import Select from './Select/Select';
 import GameScreen from "./GameScreen";
 
-
 import s from './Start.module.css';
 
 export default function Start() {
@@ -15,22 +14,24 @@ export default function Start() {
     const playBtnHandler = () => setIsGameOn(true);
 
     return (
-        <header className={s["Start-header"]}>
-            <Header gameOn={isGameOn} />
-            {isGameOn ?
-                (
-                    startGame ?
-                        <GameScreen /> :
-                        <Select />
-                ) :
-                <Button
-                    role="button"
-                    onClick={playBtnHandler}
-                    active
-                >
-                    Play
-                </Button>
-            }
-        </header>
+        <>
+            <header className={s["Start-header"]}>
+                <Header gameOn={isGameOn} />
+                {isGameOn ?
+                    (
+                        startGame ?
+                            <GameScreen /> :
+                            <Select />
+                    ) :
+                    <Button
+                        role="button"
+                        onClick={playBtnHandler}
+                        active
+                    >
+                        Play
+                    </Button>
+                }
+            </header>
+        </>
     )
 }

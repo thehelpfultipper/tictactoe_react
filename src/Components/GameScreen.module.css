@@ -1,3 +1,7 @@
+.gamescreen-wrapper {
+  width: 100%;
+}
+
 .game-nav-wrapper {
     background: transparent;
     box-shadow: none;
