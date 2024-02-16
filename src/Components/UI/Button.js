@@ -1,10 +1,10 @@
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
 
 import s from './Button.module.css';
 
-function Button({active, children, ...props}) {
+function Button({ active, children, ...props }) {
     // @props.cs refers to 'custom styles' 
-        return (
+    return (
         <button
             className={`${s.Btn} ${active ? s["Btn-active"] : s["Btn-default"]}${props.cs ? ` ${props.cs}` : ''}`}
             {...props}
