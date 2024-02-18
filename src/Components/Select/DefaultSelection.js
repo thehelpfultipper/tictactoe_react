@@ -20,14 +20,14 @@ export default function DefaultSelection({ onPlayerSelect }) {
         <div className={s.selection}>
             <Button
                 active={activeBtn === 'X'}
-                cs={s.player}
+                cs={s.playerX}
                 value='X'
                 role='button'
                 onClick={playerSelectionHandler}>X</Button>
             <strong>OR</strong>
             <Button
                 active={activeBtn === 'O'}
-                cs={s.player}
+                cs={s.playerO}
                 value='O'
                 role='button'
                 onClick={playerSelectionHandler}>O</Button>

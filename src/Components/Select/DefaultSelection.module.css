@@ -1,10 +1,20 @@
-.player {
-    /* margin: 20px; */
+/* .playerX {
+    margin-right: 5px;
 }
+
+.playerO {
+    margin-left: 5px;
+} */
 
 .selection {
     display: flex;
     align-items: center;
     gap: 2rem;
     justify-content: center;
+}
+
+@media (max-width: 320px) {
+    .selection {
+        gap: .8rem;
+    }
 }

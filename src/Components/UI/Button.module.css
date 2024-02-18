@@ -13,12 +13,6 @@
     transition: box-shadow .3s ease;
 }
 
-@media (max-width: 768px) {
-    .Btn {
-        padding: 1rem 2rem;
-    }
-}
-
 .Btn-active {
     background: var(--active-blue);
 }
@@ -29,4 +23,18 @@
 
 .Btn-default {
     background: var(--txtbx-purple);
+}
+
+
+@media (max-width: 768px) {
+    .Btn {
+        padding: 1rem 2rem;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .Btn {
+        font-size: 2rem;
+    }
 }
