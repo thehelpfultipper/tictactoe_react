@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 
 import s from  './Board.module.css';
 
-export default function BoardGrid({board, onCellClick}) {
+export default function BoardGrid({board, onCellClick, ...props}) {
     let cellRef= useRef([]);
     const numRows = 3;
     const numCols = 3;
@@ -26,6 +26,13 @@ export default function BoardGrid({board, onCellClick}) {
           } else if (e.key === 'ArrowRight') {
             moveFocus(index === numCols * numRows - 1 ? index - numCols + 1 : index + 1);
           }
+    }
+    
+    const cellClickHandler = (index) => {
+      let clickedCell = cellRef.current[index];
+      props.onCellActive(true);
+      props.onSetCell(prevCell => [...prevCell, clickedCell]);
+      onCellClick(index, clickedCell);
     }
 
     useEffect(() => {
@@ -51,7 +58,7 @@ export default function BoardGrid({board, onCellClick}) {
                         key={index}
                         tabIndex={0}
                         ref={el=>(cellRef.current[index] = el)}
-                        onClick={() => onCellClick(index)}
+                        onClick={() => cellClickHandler(index)}
                         onKeyDown={(e)=>keyPressHandler(e, index)}
                     >{cell}</div>
                 })

@@ -16,6 +16,8 @@ export default function GameBoard(props) {
     let [isHuman, setIsHuman] = useState(false);
     let [currentPlayer, setCurrentPlayer] = useState(null);
     let [winner, setWinner] = useState(null);
+    let [isCellActive, setIsCellActive] = useState(false);
+    let [cell, setCell] = useState([]);
 
     const { players, setPlayers, resetBoard, setResetBoard } = useContext(GameContext);
     const { human, computer } = players;
@@ -128,7 +130,7 @@ export default function GameBoard(props) {
         setCurrentPlayer(human.symbol);
     };
 
-    const cellClickHandler = (index) => {
+    const cellClickHandler = (index, cell) => {
         // Check if cell is played or there's winner
         if (board[index] || winner || !isHuman) return;
 
@@ -151,7 +153,6 @@ export default function GameBoard(props) {
                 }
             });
             props.rounds.setRounds(prev => prev + 1)
-
             console.log('human winner')
         }
         else {
@@ -184,6 +185,8 @@ export default function GameBoard(props) {
         setIsHuman(false);
         setCurrentPlayer(null);
         startingPlayer();
+        setIsCellActive(false);
+        setCell(null);
     };
 
     const resetGameBoard = useCallback(() => {
@@ -222,11 +225,24 @@ export default function GameBoard(props) {
         console.log('Running reset')
         if (resetBoard) {
             resetGameBoard();
+            setIsCellActive(false);
+            cell.forEach(item=>item.classList.remove(s.active));
+            setCell([]);
         } else {
             return;
         }
 
     }, [resetBoard, resetGameBoard]);
+
+    useEffect(()=>{
+        console.log(cell)
+        if(cell.length===0) return;
+        if(isCellActive) {
+            cell.forEach(item => item.textContent===human.symbol && item.classList.add(s.active));
+        } else {
+            cell.forEach(item => item.classList.remove(s.active));
+        }
+    }, [isCellActive, cell]);
 
     return (
         <Card className={s["board-wrapper"]}>
@@ -234,7 +250,7 @@ export default function GameBoard(props) {
             {props.isEnd ? <ScoreBoard rounds={props.rounds} onEnd={props.onEndGame} /> : null}
             <Players current={currentPlayer} />
             <Status cPlayer={currentPlayer} winner={winner} />
-            <BoardGrid board={board} onCellClick={cellClickHandler} />
+            <BoardGrid board={board} onCellClick={cellClickHandler} onCellActive={setIsCellActive} onSetCell={setCell} />
         </Card>
     )
 }

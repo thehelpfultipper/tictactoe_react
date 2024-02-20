@@ -29,7 +29,11 @@
   transition: all 0.3s ease-in-out;
 }
 
-.cell:hover {
+/* .cell:hover {
+  border-color: var(--pink-tint);
+  background-color: var(--txtbx-purple);
+} */
+.active {
   border-color: var(--pink-tint);
   background-color: var(--txtbx-purple);
 }
