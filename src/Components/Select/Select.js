@@ -48,7 +48,7 @@ export default function Select() {
     const nameSelectHandler = (name) => setPlayerName(name);
 
     const nxtBtnHandler = () => {
-        console.log('NEXT')
+        // console.log('NEXT')
         if (player === '') {
             setIsPlayerSelected(false);
             alert('Error: No Player selected!');
@@ -62,7 +62,7 @@ export default function Select() {
     }
 
     const doneBtnHandler = () => {
-        console.log('DONE')
+        // console.log('DONE')
         if (playerName === '') {
             alert('Error: You must enter a name!');
             return;
@@ -80,8 +80,8 @@ export default function Select() {
                 computer: {...player2, score: 0}
             }
 
-            console.log(gamePlayers)
-            console.log('isback on done: ' + isBack)
+            // console.log(gamePlayers)
+            // console.log('isback on done: ' + isBack)
             setShowBoard(true);
             setPlayers(gamePlayers);
         }

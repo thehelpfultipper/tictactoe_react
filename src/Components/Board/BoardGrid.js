@@ -14,7 +14,7 @@ export default function BoardGrid({board, onCellClick, ...props}) {
       };
 
     const keyPressHandler = (e, index) => {
-        console.log('index: ' + index);
+        // console.log('index: ' + index);
         if (e.key === 'Enter') {
             onCellClick(index);
         } else if (e.key === 'ArrowUp') {

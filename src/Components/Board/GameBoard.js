@@ -33,7 +33,7 @@ export default function GameBoard(props) {
             const [a, b, c] = condition;
 
             if (currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a] === currentBoard[c]) {
-                console.log('winning condition: ' + condition)
+                // console.log('winning condition: ' + condition)
 
                 return currentBoard[a];
             }
@@ -41,7 +41,7 @@ export default function GameBoard(props) {
 
         if (currentBoard.every(cell => cell)) {
             setWinner('draw');
-            console.log('DRAW')
+            // console.log('DRAW')
             return 'draw';
         }
 
@@ -60,7 +60,7 @@ export default function GameBoard(props) {
             testBoard[emptyCells[i]] = computer.symbol;
             if (checkWinner(testBoard) === computer.symbol) {
                 bestMove = emptyCells[i];
-                console.log('BEST MOVE')
+                // console.log('BEST MOVE')
                 break;
             }
         }
@@ -71,7 +71,7 @@ export default function GameBoard(props) {
                 testBoard[emptyCells[i]] = human.symbol;
                 if (checkWinner(testBoard) === human.symbol) {
                     bestMove = emptyCells[i];
-                    console.log('BEST MOVE to BLOCK')
+                    // console.log('BEST MOVE to BLOCK')
                     break;
                 }
             }
@@ -81,19 +81,19 @@ export default function GameBoard(props) {
             const centerIndex = 4;
             if (emptyCells.includes(centerIndex)) {
                 bestMove = centerIndex;
-                console.log('BEST MOVE to CENTER')
+                // console.log('BEST MOVE to CENTER')
             } else {
                 const cornerIndices = [0, 2, 6, 8];
                 const emptyCorners = emptyCells.filter(cell => cornerIndices.includes(cell));
                 if (emptyCorners.length > 0) {
                     const randomCornerIndex = Math.floor(Math.random() * emptyCorners.length);
                     bestMove = emptyCorners[randomCornerIndex];
-                    console.log('BEST MOVE at CORNER')
+                    // console.log('BEST MOVE at CORNER')
 
                 } else {
                     const randomIndex = Math.floor(Math.random() * emptyCells.length);
                     bestMove = emptyCells[randomIndex];
-                    console.log('BEST MOVE at RANDOM')
+                    // console.log('BEST MOVE at RANDOM')
 
                 }
             }
@@ -115,12 +115,12 @@ export default function GameBoard(props) {
                 }
             });
             props.rounds.setRounds(prev => prev + 1);
-            console.log('computerMove winner')
+            // console.log('computerMove winner')
         } else if (winner === 'draw') {
             setWinner('draw');
             props.rounds.setRounds(prev => prev + 1)
 
-            console.log('computerMove draw')
+            // console.log('computerMove draw')
         }
 
         // setIsHuman(true);
@@ -134,14 +134,14 @@ export default function GameBoard(props) {
         // Check if cell is played or there's winner
         if (board[index] || winner || !isHuman) return;
 
-        console.log('CELL CLICKED: ', index);
+        // console.log('CELL CLICKED: ', index);
         // Copy of new board to update existing
         const newBoard = [...board];
         newBoard[index] = human.symbol;
         setBoard(newBoard);
 
         setCurrentPlayer(computer.symbol);
-        console.log('running checkWinner after player click:')
+        // console.log('running checkWinner after player click:')
 
         if (checkWinner(newBoard) === human.symbol) {
             setWinner(human.symbol);
@@ -153,10 +153,10 @@ export default function GameBoard(props) {
                 }
             });
             props.rounds.setRounds(prev => prev + 1)
-            console.log('human winner')
+            // console.log('human winner')
         }
         else {
-            console.log('no winner after click, play computer')
+            // console.log('no winner after click, play computer')
             setTimeout(() => {
                 computerMove([...newBoard]);
             }, 500);
@@ -169,7 +169,7 @@ export default function GameBoard(props) {
         setCurrentPlayer(randomStarter);
 
         if (randomStarter === computer.symbol) {
-            console.log('COMPUTER GOES FIRST')
+            // console.log('COMPUTER GOES FIRST')
             setTimeout(() => {
                 computerMove([...board]);
             }, 500);
@@ -190,7 +190,7 @@ export default function GameBoard(props) {
     };
 
     const resetGameBoard = useCallback(() => {
-        console.log('Resetting board...');
+        // console.log('Resetting board...');
         setResetBoard(false);
         resetGame();
     }, []);
@@ -222,7 +222,7 @@ export default function GameBoard(props) {
     }, []);
 
     useEffect(() => {
-        console.log('Running reset')
+        // console.log('Running reset')
         if (resetBoard) {
             resetGameBoard();
             setIsCellActive(false);
@@ -235,7 +235,6 @@ export default function GameBoard(props) {
     }, [resetBoard, resetGameBoard]);
 
     useEffect(()=>{
-        console.log(cell)
         if(cell.length===0) return;
         if(isCellActive) {
             cell.forEach(item => item.textContent===human.symbol && item.classList.add(s.active));
