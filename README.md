@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# PinkPanda's Tic Tac Toe Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to PinkPanda's Tic Tac Toe, a classic Tic Tac Toe game where you can play against the computer. The game features a responsive design and intuitive user interface, making it enjoyable to play on both desktop and mobile devices.
 
-## Available Scripts
+## Live Demo
 
-In the project directory, you can run:
+Check out the live demo of the app hosted on GitHub Pages: [PinkPanda's Tic Tac Toe](https://thehelpfultipper.github.io/tictactoe_react/)
 
-### `npm start`
+## Tutorial
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Read how to build this app in our tutorial blog post: WIP
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
+- Play against the computer in a classic game of Tic Tac Toe.
+- Responsive design ensures a seamless gaming experience across all devices.
+- Clear and intuitive user interface for easy gameplay.
+- Advance state management for gameboard, players, and score.
 
-### `npm test`
+## Technologies Used
+- **React.js:** A popular JavaScript library for building user interfaces.
+- **HTML5:** Used for structuring the web page content.
+- **CSS3:** Used for styling the components and layout.
+- **JavaScript:** Used for implementing the game logic and functionality.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Play
+1. Start the game by clicking on the "Play" button.
+2. Choose whether you want to play as "X" or "O".
+3. Select your game name handler and follow prompts to "Game On".
+4. Click on any empty cell on the game board to make your move when it's your turn.
+5. The computer will make its move automatically.
+6. Continue playing until one player wins or the game ends in a draw.
+7. Clear the board using "Reset" to play multiple rounds against the same opponent.
+8. Restart the game by clicking "End" to be redirected to start screen.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+PinkPanda's Tic Tac Toe is open-source software licensed under the MIT license.
