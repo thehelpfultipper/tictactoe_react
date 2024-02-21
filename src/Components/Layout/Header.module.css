@@ -1,5 +1,4 @@
 .logo-wrapper {
-  background-image: radial-gradient(#fff, var(--pink-tint), var(--blue-tint));
   height: 20vmin;
   border-radius: 50%;
 }

@@ -8,19 +8,12 @@ import Button from '../UI/Button';
 import GameContext from '../../context/game-context';
 
 export default function Nav({ isSelect, player, ...props }) {
-    let { setShowBoard, setPlayers, setIsGameOn, setStartGame, setResetBoard } = useContext(GameContext);
+    let { setResetBoard } = useContext(GameContext);
 
     const backArrowHandler = () => {
         props.onBack(true);
         props.onBackAction();
     }
-
-    // const endGameHandler = () => {
-    //     setIsGameOn(false);
-    //     setPlayers({});
-    //     setShowBoard(false);
-    //     setStartGame(false);
-    // }
 
     const cardNav = <div className={`${s["Nav-wrapper"]}${!player ? ` ${s["flx-end"]}` : ''}`}>
         {

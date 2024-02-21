@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
-import logo from '../../logo.svg';
+import logo from '../../Assets/logo.svg';
+
 import s from './Header.module.css';
 
 export default function Header({gameOn}) {
